@@ -23,6 +23,12 @@ public class UsersController {
 
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
+	
+	@RequestMapping("/user/list/update")
+	public String updateList(Model model) {
+		model.addAttribute("usersList", usersService.getUsers());
+		return "user/list :: tableUsers";
+	}
 
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
@@ -63,8 +69,11 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-		user.setId(id);
-		usersService.addUser(user);
+		User userViejo = usersService.getUser(id);
+		userViejo.setDni(user.getDni());
+		userViejo.setName(user.getName());
+		userViejo.setLastName(user.getLastName());
+		usersService.addUser(userViejo);
 		return "redirect:/user/details/" + id;
 	}
 
