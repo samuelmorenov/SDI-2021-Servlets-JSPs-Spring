@@ -11,30 +11,30 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
+				<li><a href="/" th:text="#{nav.inicio}"></a></li>
 				<li id="marks-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Gestión de notas <span
+					data-toggle="dropdown" href="#" th:text="#{nav.gestion.notas}"> Gestión de notas <span
 						class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/mark/add">Agregar Nota</a></li>
-						<li><a href="/mark/list">Ver Notas</a></li>
+						<li><a href="/mark/add" th:text="#{nav.agregar.notas}">Agregar Nota</a></li>
+						<li><a href="/mark/list" th:text="#{nav.listar.notas}">Ver Notas</a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Gestión de Usuarios <span
+					data-toggle="dropdown" href="#" th:text="#{nav.gestion.usuarios}"> Gestión de Usuarios <span
 						class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/add">Agregar usuario</a></li>
-						<li><a href="/user/list">Ver Usuarios</a></li>
+						<li><a href="/user/add" th:text="#{nav.agregar.usuarios}">Agregar usuario</a></li>
+						<li><a href="/user/list" th:text="#{nav.listar.usuarios}">Ver Usuarios</a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Gestión de Profesores <span
+					data-toggle="dropdown" href="#" th:text="#{nav.gestion.profesores}"> Gestión de Profesores <span
 						class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-				<li><a href="/professor/list">Ver Profesores</a></li>
-				<li><a href="/professor/add">Agregar Profesor</a></li>
+				<li><a href="/professor/list" th:text="#{nav.listar.profesores}">Ver Profesores</a></li>
+				<li><a href="/professor/add" th:text="#{nav.agregar.profesor}">Agregar Profesor</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -54,6 +54,13 @@
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.es}">Español</span>
 						</a></li>
+						<li><a id="btnRusian" value="RU"> <img
+								th:src="@{/img/if_rusian_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.ru}">Ruso</span>
+						</a></li>
+						
+						
 					</ul></li>
 				<li><a href="/signup" th:text="#{signup.message}"> <span
 						class="glyphicon glyphicon-user"></span> Registrate
