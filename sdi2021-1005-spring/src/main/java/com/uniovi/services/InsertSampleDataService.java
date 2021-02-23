@@ -17,6 +17,7 @@ public class InsertSampleDataService {
 	@Autowired
 	private UsersService usersService;
 
+	@SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 	@PostConstruct
 	public void init() {
 		User user1 = new User("99999990A", "Pedro", "Díaz");

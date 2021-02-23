@@ -3,7 +3,8 @@ package com.uniovi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uniovi.entities.Mark;
 import com.uniovi.services.MarksService;
 import com.uniovi.services.UsersService;
+import com.uniovi.validators.AddMarkValidator;
 
 @Controller
 public class MarksController {
@@ -20,6 +22,9 @@ public class MarksController {
 
 	@Autowired
 	private UsersService usersService;
+
+	@Autowired
+	private AddMarkValidator addMarkValidator;
 
 	@RequestMapping("/mark/list/update")
 	public String updateList(Model model) {
@@ -34,7 +39,11 @@ public class MarksController {
 	}
 
 	@RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-	public String setMark(@ModelAttribute Mark mark) {
+	public String setMark(@Validated Mark mark, BindingResult result, Model model) {
+		addMarkValidator.validate(mark, result);
+		if (result.hasErrors()) {
+			return "mark/add";
+		}
 		marksService.addMark(mark);
 
 		return "redirect:/mark/list";
@@ -55,6 +64,7 @@ public class MarksController {
 	@RequestMapping(value = "/mark/add")
 	public String getMark(Model model) {
 		model.addAttribute("usersList", usersService.getUsers());
+		model.addAttribute("mark", new Mark());
 		return "mark/add";
 	}
 
@@ -66,7 +76,7 @@ public class MarksController {
 	}
 
 	@RequestMapping(value = "/mark/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Mark mark) {
+	public String setEdit(Model model, @PathVariable Long id, @Validated Mark mark) {
 		Mark original = marksService.getMark(id);
 		// modificar solo score y description
 		original.setScore(mark.getScore());

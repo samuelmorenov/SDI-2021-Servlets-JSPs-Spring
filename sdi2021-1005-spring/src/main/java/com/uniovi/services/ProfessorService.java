@@ -25,6 +25,10 @@ public class ProfessorService {
 	public Professor getProfessor(Long id) {
 		return professorRepository.findById(id).get();
 	}
+	
+	public Professor getProfessorByDNI(String dni) {
+		return professorRepository.findByDNI(dni);
+	}
 
 	public void addProfessor(Professor professor) {
 		professorRepository.save(professor);
