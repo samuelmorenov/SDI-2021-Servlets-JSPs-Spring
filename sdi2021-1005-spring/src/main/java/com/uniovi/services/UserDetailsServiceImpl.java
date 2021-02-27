@@ -23,7 +23,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		// mismo user que el que maneja nuestra aplicación.
 		User user = usersRepository.findByDni(dni);
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ESTUDIANTE"));
+		
+		//grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ESTUDIANTE"));
+		grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+		
 		// DONE: Spring security llama a las propiedades de identificación: Username y
 		// password.
 		return new org.springframework.security.core.userdetails.User(user.getDni(), user.getPassword(),
