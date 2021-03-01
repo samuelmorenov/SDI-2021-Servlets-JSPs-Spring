@@ -91,5 +91,14 @@ public class InsertSampleDataService {
 		Professor profesor1 = new Professor("12345678A", "Antonio", "Morales", "Matematicas");
 		professorService.addProfessor(profesor1);
 		
+		Professor profesor2 = new Professor("12345678B", "Luis", "Nieves", "Fisica");
+		professorService.addProfessor(profesor2);
+		
+		Professor profesor3 = new Professor("12345678C", "Juan", "Barros", "Calculo");
+		professorService.addProfessor(profesor3);
+		
+		Professor profesor4 = new Professor("12345678D", "Joseba", "Salcedo", "Estadistica");
+		professorService.addProfessor(profesor4);
+		
 	}
 }

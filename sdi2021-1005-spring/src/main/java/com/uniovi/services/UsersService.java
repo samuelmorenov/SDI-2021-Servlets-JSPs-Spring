@@ -1,10 +1,18 @@
 package com.uniovi.services;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import com.uniovi.entities.User;
 import com.uniovi.repositories.UsersRepository;
 
@@ -48,6 +56,18 @@ public class UsersService {
 		List<User> users = new ArrayList<User>();
 		searchText = "%" + searchText + "%";
 		users = usersRepository.searchByNameAndLastname(searchText);
+		return users;
+	}
+
+	public Page<User> searchByNameAndLastname(Pageable pageable, String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		searchText = "%" + searchText + "%";
+		users = usersRepository.searchByNameAndLastname(pageable, searchText);
+		return users;
+	}
+
+	public Page<User> getUsers(Pageable pageable) {
+		Page<User> users = usersRepository.findAll(pageable);
 		return users;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Professor;
@@ -25,7 +27,7 @@ public class ProfessorService {
 	public Professor getProfessor(Long id) {
 		return professorRepository.findById(id).get();
 	}
-	
+
 	public Professor getProfessorByDNI(String dni) {
 		return professorRepository.findByDNI(dni);
 	}
@@ -36,6 +38,11 @@ public class ProfessorService {
 
 	public void deleteProfessor(Long id) {
 		professorRepository.deleteById(id);
+	}
+
+	public Page<Professor> getProfessors(Pageable pageable) {
+		Page<Professor> professor = professorRepository.findAll(pageable);
+		return professor;
 	}
 
 }
